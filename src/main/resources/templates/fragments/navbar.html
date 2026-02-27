@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+
+</head>
+
+<body>
+
+    <nav th:fragment="navbar" class="navbar text-white">
+
+        <div class="container-fluid">
+
+            <!-- Titolo -->
+            <a th:href="@{/}" id="title" class="navbar-brand mb-0">SIMULATORI</a>
+
+            <!-- Pulsante di referesh della pagina -->
+        </div>
+
+    </nav>
+
+    <!-- Bootstrap Bundle -->
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

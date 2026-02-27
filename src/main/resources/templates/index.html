@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+
+    <!-- Custom CSS -->
+
+    <!-- CSS Navbar  -->
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+
+    <!-- CSS buttonsRow  -->
+    <link th:rel="stylesheet" th:href="@{/css/buttonsRow.css}" />
+
+    <title>Simulatori</title>
+</head>
+
+<body>
+
+    <header>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+    </header>
+
+    <main>
+
+        <div class="container">
+
+            <!-- Riga dedicata a pulsanti:
+                - AGGIUNGI  simulatore
+                - CERCA simulazione            
+            -->
+            <div class="row mt-3 pb-2 buttonsRow">
+
+                <!-- pulsante aggiungi simulatore -->
+                <div class="col-auto">
+
+                    <a class="btn singleButttonStyle" th:href="@{/AggiungiSimulatore}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+                        </svg>
+
+                        Aggiungi Simulatore
+
+                    </a>
+
+                </div>
+
+                <!-- pulsante ricerca simulazione -->
+                <div class="col-auto">
+
+                    <a class="btn singleButttonStyle" th:href="@{/TrovaSimulazione}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+
+                        Trova Simulazione
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Visualizzatore di tutti i simulatori nel database -->
+            <div class="row mt-2">
+
+                <!-- Alert mancanza simulatori -->
+
+
+                <!-- Elenco card di tutti i simulatori -->
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Bootstrap Bundle -->
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

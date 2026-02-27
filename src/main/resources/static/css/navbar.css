@@ -1,0 +1,13 @@
+header {
+    background-color: rgb(195, 0, 0);
+    border-bottom: 2px solid black;
+}
+
+#title {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 35px;
+    text-decoration: none;
+    color: inherit;
+    /* cursor: default; */
+}

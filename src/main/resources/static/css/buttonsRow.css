@@ -1,0 +1,16 @@
+.buttonsRow {
+    border-bottom: 2px solid rgb(195, 0, 0);
+}
+
+.singleButttonStyle {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    /* box-shadow: 0 3px #999; */
+}
+
+.singleButttonStyle:hover {
+    background-color: rgb(195, 0, 0);
+    color: white;
+}
