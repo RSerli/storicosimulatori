@@ -25,10 +25,52 @@
         <nav th:replace="fragments/navbar :: navbar"></nav>
     </header>
 
-    <main>
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2 class="mb-4">Aggiungi Nuovo Simulatore</h2>
 
-        <span> Form Aggiungi simulatore</span>
+                <form th:action="@{/AggiungiSimulatore}" th:method="post" th:object="${simulatore}"
+                    class="needs-validation">
 
+                    <div class="mb-3">
+                        <label for="nomeServer" class="form-label">Nome Server <span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="nomeServer" th:field="*{nomeServer}"
+                            placeholder="Inserisci il nome del server" required>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nomeServer')}"
+                            th:errors="*{nomeServer}"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ipString" class="form-label">Indirizzo IP <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="ipString" th:field="*{ipString}"
+                            placeholder="es. 192.168.1.1" required>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('ipString')}"
+                            th:errors="*{ipString}"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="sistemaOperativo" class="form-label">Sistema Operativo <span
+                                class="text-danger">*</span></label>
+                        <select class="form-select" id="sistemaOperativo" th:field="*{sistemaOperativo}" required>
+                            <option value="">-- Seleziona un sistema operativo --</option>
+                            <option value="Windows">Windows</option>
+                            <option value="Linux">Linux</option>
+                            <option value="MacOS">MacOS</option>
+                        </select>
+                        <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('sistemaOperativo')}"
+                            th:errors="*{sistemaOperativo}"></div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Salva Simulatore</button>
+                        <a href="/" class="btn btn-secondary">Annulla</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </main>
 
 

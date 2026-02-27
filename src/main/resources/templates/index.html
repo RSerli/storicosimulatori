@@ -75,13 +75,43 @@
 
             <!-- Visualizzatore di tutti i simulatori nel database -->
             <div class="row mt-2">
-
                 <!-- Alert mancanza simulatori -->
 
+                <div th:if="${simulatori == null or #lists.isEmpty(simulatori)}" class="alert alert-info">
+                    Nessun simulatore trovato.
+                </div>
 
                 <!-- Elenco card di tutti i simulatori -->
+                <div class="col-12">
 
+                    <div th:if="${simulatori != null and !#lists.isEmpty(simulatori)}">
 
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            <div class="col" th:each="sim : ${simulatori}">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${sim.nomeServer}">Nome Server</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted" th:text="${sim.ipString}">0.0.0.0</h6>
+                                        <p class="card-text">
+                                            <strong>Sistema Operativo:</strong>
+                                            <span th:text="${sim.sistemaOperativo}">OS</span>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">Simulazioni: <span
+                                                th:text="${#lists.size(sim.simulazioniAssociate)}">0</span></small>
+                                        <div>
+                                            <a th:href="@{'/simulatore/' + ${sim.id}}"
+                                                class="btn btn-sm btn-outline-primary">Dettagli</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
         </div>
