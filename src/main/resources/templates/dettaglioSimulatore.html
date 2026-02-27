@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+
+    <!-- CSS Navbar  -->
+    <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
+
+    <title>Dettaglio Simulatore</title>
+</head>
+
+<body>
+
+    <header>
+        <nav th:replace="fragments/navbar :: navbar"></nav>
+    </header>
+
+    <main class="container-fluid mt-5">
+
+        <div class="row">
+            <!-- LEFT COLUMN: Dettagli Simulatore -->
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Dettagli Simulatore</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">ID Simulatore:</label>
+                            <p class="form-control-plaintext" th:text="${simulatore.id}"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nome Server:</label>
+                            <p class="form-control-plaintext" th:text="${simulatore.nomeServer}"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Indirizzo IP:</label>
+                            <p class="form-control-plaintext" th:text="${simulatore.ipString}"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Sistema Operativo:</label>
+                            <p class="form-control-plaintext" th:text="${simulatore.sistemaOperativo}"></p>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <a href="/AggiungiSimulatore" class="btn btn-primary btn-sm">Modifica</a>
+                            <a href="/" class="btn btn-secondary btn-sm">Indietro</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Tabella Simulazioni -->
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Simulazioni Associate</h5>
+                        <button class="btn btn-light btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#aggiungiSimulazioneModal">
+                            <i class="bi bi-plus-circle"></i> Aggiungi Simulazione
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${#lists.isEmpty(simulatore.simulazioniAssociate)}" class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> Nessuna simulazione associata a questo simulatore.
+                        </div>
+
+                        <div th:if="${!#lists.isEmpty(simulatore.simulazioniAssociate)}" class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Data Creazione</th>
+                                        <th>Nome Impianto</th>
+                                        <th>Nome Tencinco</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="simulazione : ${simulatore.simulazioniAssociate}">
+                                        <td th:text="${#temporals.format(simulazione.createdAt, 'dd/MM/yyyy')}"></td>
+                                        <td th:text="${simulazione.nomeImpianto}"></td>
+                                        <td th:text="${simulazione.nomeTencinco}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Aggiungi Simulazione -->
+    <div class="modal fade" id="aggiungiSimulazioneModal" tabindex="-1" aria-labelledby="aggiungiSimulazioneLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="aggiungiSimulazioneLabel">Aggiungi Nuova Simulazione</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <form th:action="@{{ide}/aggiungiSimulazione(ide=${simulatore.id})}" th:method="post"
+                    th:object="${simulazione}" id="formSimulazione">
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="nomeImpianto" class="form-label">Nome Impianto <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nomeImpianto" th:field="*{nomeImpianto}"
+                                placeholder="Inserisci il nome dell'impianto" required>
+                            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nomeImpianto')}"
+                                th:errors="*{nomeImpianto}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nomeTencinco" class="form-label">Nome Tecnico <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nomeTencinco" th:field="*{nomeTencinco}"
+                                placeholder="Inserisci il nome tecnico" required>
+                            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nomeTencinco')}"
+                                th:errors="*{nomeTencinco}"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-success">Salva Simulazione</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle -->
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
