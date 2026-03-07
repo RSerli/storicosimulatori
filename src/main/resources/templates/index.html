@@ -96,6 +96,15 @@
                                             <strong>Sistema Operativo:</strong>
                                             <span th:text="${sim.sistemaOperativo}">OS</span>
                                         </p>
+                                        <p class="card-text d-flex align-items-center gap-2">
+                                            <strong>Stato:</strong>
+                                            <span class="badge rounded-pill"
+                                                th:classappend="${sim.serverAcceso} ? 'bg-success' : 'bg-danger'"
+                                                th:text="${sim.serverAcceso} ? 'Online' : 'Offline'"></span>
+                                            <span class="rounded-circle"
+                                                style="width: 10px; height: 10px; display: inline-block;"
+                                                th:classappend="${sim.serverAcceso} ? 'bg-success' : 'bg-danger'"></span>
+                                        </p>
                                     </div>
                                     <div class="card-footer d-flex justify-content-between align-items-center">
                                         <small class="text-muted">Simulazioni: <span

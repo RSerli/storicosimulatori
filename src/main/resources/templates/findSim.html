@@ -26,9 +26,57 @@
     </header>
 
     <main>
+        <div class="container mt-4">
+            <h1 class="mb-4">Ricerca Simulazione</h1>
 
-        <span> Ricerca Simulazione</span>
+            <form class="row g-3 mb-4" th:action="@{/TrovaSimulazione}" method="get">
 
+                <div class="col-md-5">
+                    <label for="nomeImpianto" class="form-label">Nome impianto</label>
+                    <input type="text" id="nomeImpianto" name="nomeImpianto" class="form-control"
+                        th:value="${nomeImpianto}" placeholder="Inserisci nome impianto" />
+                </div>
+
+                <div class="col-md-5">
+                    <label for="nomeTecnico" class="form-label">Nome tecnico</label>
+                    <input type="text" id="nomeTecnico" name="nomeTecnico" class="form-control"
+                        th:value="${nomeTecnico}" placeholder="Inserisci nome tecnico" />
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Cerca</button>
+                </div>
+
+            </form>
+
+            <div th:if="${simulazioni == null or #lists.isEmpty(simulazioni)}" class="alert alert-info">
+                Nessuna simulazione trovata.
+            </div>
+
+            <div th:if="${simulazioni != null and !#lists.isEmpty(simulazioni)}" class="table-responsive">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Nome Impianto</th>
+                            <th scope="col">Nome Tecnico</th>
+                            <th scope="col">Simulatore</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sim : ${simulazioni}">
+                            <td th:text="${sim.id}">1</td>
+                            <td th:text="${sim.createdAt}">2026-01-01</td>
+                            <td th:text="${sim.nomeImpianto}">Impianto</td>
+                            <td th:text="${sim.nomeTencinco}">Tecnico</td>
+                            <td th:text="${sim.simulatoreAssociatoImpianto != null ? sim.simulatoreAssociatoImpianto.nomeServer : '-'}">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </main>
 
 

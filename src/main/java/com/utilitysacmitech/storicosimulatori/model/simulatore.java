@@ -31,6 +31,7 @@ public class simulatore {
     @NotNull (message="Campo obbligatorio")
     private String sistemaOperativo;
 
+    private Boolean serverAcceso = false;
 
     @OneToMany(mappedBy="simulatoreAssociatoImpianto")
     private List<simulazioneGenerale> simulazioniAssociate;
@@ -65,6 +66,14 @@ public class simulatore {
 
     public void setSistemaOperativo(String sistemaOperativo) {
         this.sistemaOperativo = sistemaOperativo;
+    }
+
+    public Boolean getServerAcceso() {
+        return serverAcceso;
+    }
+
+    public void setServerAcceso(Boolean serverAcceso) {
+        this.serverAcceso = serverAcceso;
     }
 
     public List<simulazioneGenerale> getSimulazioniAssociate() {

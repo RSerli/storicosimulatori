@@ -24,6 +24,21 @@ public class simulazioneService {
         return repository.findAll();
     }
 
+    public Iterable<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCase(String nomeImpianto) {
+        return repository.findByNomeImpiantoContainingIgnoreCase(nomeImpianto);
+    }
+
+    public Iterable<simulazioneGenerale> findByNomeTencincoContainingIgnoreCase(String nomeTencinco) {
+        return repository.findByNomeTencincoContainingIgnoreCase(nomeTencinco);
+    }
+
+    public Iterable<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCase(
+            String nomeImpianto,
+            String nomeTencinco) {
+        return repository.findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCase(nomeImpianto,
+                nomeTencinco);
+    }
+
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
