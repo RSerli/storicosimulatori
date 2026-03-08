@@ -57,7 +57,6 @@
                 <table class="table table-striped table-bordered align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Data</th>
                             <th scope="col">Nome Impianto</th>
                             <th scope="col">Nome Tecnico</th>
@@ -66,11 +65,12 @@
                     </thead>
                     <tbody>
                         <tr th:each="sim : ${simulazioni}">
-                            <td th:text="${sim.id}">1</td>
                             <td th:text="${sim.createdAt}">2026-01-01</td>
                             <td th:text="${sim.nomeImpianto}">Impianto</td>
                             <td th:text="${sim.nomeTencinco}">Tecnico</td>
-                            <td th:text="${sim.simulatoreAssociatoImpianto != null ? sim.simulatoreAssociatoImpianto.nomeServer : '-'}">-</td>
+                            <td
+                                th:text="${sim.simulatoreAssociatoImpianto != null ? sim.simulatoreAssociatoImpianto.nomeServer : '-'}">
+                                -</td>
                         </tr>
                     </tbody>
                 </table>
