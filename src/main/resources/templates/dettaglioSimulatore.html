@@ -59,7 +59,10 @@
                         </div>
 
                         <div class="d-flex gap-2">
-                            <a th:href="@{/AggiungiSimulatore}" class="btn btn-primary btn-sm">Modifica</a>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#modificaSimulatoreModal">
+                                Modifica
+                            </button>
                             <a href="/" class="btn btn-secondary btn-sm">Indietro</a>
                         </div>
                     </div>
@@ -152,8 +155,84 @@
         </div>
     </div>
 
+    <!-- Modal Modifica Simulatore -->
+    <div class="modal fade" id="modificaSimulatoreModal" tabindex="-1" aria-labelledby="modificaSimulatoreLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modificaSimulatoreLabel">Modifica Simulatore</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <form th:action="@{/simulatore/{id}/modifica(id=${simulatore.id})}" th:method="post"
+                    th:object="${simulatore}" id="formModificaSimulatore">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="mb-3">
+                            <label for="nomeServer" class="form-label">Nome Server <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="nomeServer" th:field="*{nomeServer}"
+                                placeholder="Inserisci il nome server" required>
+                            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('nomeServer')}"
+                                th:errors="*{nomeServer}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ipString" class="form-label">Indirizzo IP <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="ipString" th:field="*{ipString}"
+                                placeholder="Inserisci l'indirizzo IP" required>
+                            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('ipString')}"
+                                th:errors="*{ipString}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sistemaOperativo" class="form-label">Sistema Operativo <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" id="sistemaOperativo" th:field="*{sistemaOperativo}" required>
+                                <option value="">-- Seleziona un sistema operativo --</option>
+                                <option value="Windows 7">Windows 7</option>
+                                <option value="Windows 10">Windows 10</option>
+                                <option value="Windows 11">Windows 11</option>
+                                <option value="Linux">Linux</option>
+                                <option value="MacOS">MacOS</option>
+                            </select>
+                            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('sistemaOperativo')}"
+                                th:errors="*{sistemaOperativo}"></div>
+
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="serverAcceso"
+                                th:field="*{serverAcceso}">
+                            <label class="form-check-label" for="serverAcceso">Server acceso</label>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap Bundle -->
     <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+
+    <script th:if="${openEditModal}">
+        var editModal = new bootstrap.Modal(document.getElementById('modificaSimulatoreModal'));
+        editModal.show();
+    </script>
 </body>
 
 </html>

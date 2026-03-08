@@ -54,4 +54,22 @@ public class detailSimulatorController {
         
         return "redirect:/simulatore/" + ide;
     }
+
+    @PostMapping("/{id}/modifica")
+    public String updateSimulatore(@PathVariable Integer id, @Valid simulatore simulatore, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            simulatore existing = service.findById(id);
+            if (existing != null) {
+                simulatore.setSimulazioniAssociate(existing.getSimulazioniAssociate());
+            }
+            model.addAttribute("simulatore", simulatore);
+            model.addAttribute("simulazione", new simulazioneGenerale());
+            model.addAttribute("openEditModal", true);
+            return "dettaglioSimulatore";
+        }
+
+        simulatore.setId(id);
+        service.saveSimulatore(simulatore);
+        return "redirect:/simulatore/" + id;
+    }
 }
