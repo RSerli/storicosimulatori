@@ -15,6 +15,8 @@
     <!-- CSS Navbar  -->
     <link th:rel="stylesheet" th:href="@{/css/navbar.css}" />
 
+    <!-- CSS buttonsRow  -->
+    <link th:rel="stylesheet" th:href="@{/css/buttonsRow.css}" />
 
     <title>Simulatori</title>
 </head>
@@ -29,22 +31,29 @@
         <div class="container mt-4">
             <h1 class="mb-4">Ricerca Simulazione</h1>
 
-            <form class="row g-3 mb-4" th:action="@{/TrovaSimulazione}" method="get">
+            <form class="row buttonsRow g-3 pb-2 mb-3" th:action="@{/TrovaSimulazione}" method="get">
 
                 <div class="col-md-5">
-                    <label for="nomeImpianto" class="form-label">Nome impianto</label>
+                    <!-- <label for="nomeImpianto" class="form-label">Nome impianto</label> -->
                     <input type="text" id="nomeImpianto" name="nomeImpianto" class="form-control"
                         th:value="${nomeImpianto}" placeholder="Inserisci nome impianto" />
                 </div>
 
                 <div class="col-md-5">
-                    <label for="nomeTecnico" class="form-label">Nome tecnico</label>
+                    <!-- <label for="nomeTecnico" class="form-label">Nome tecnico</label> -->
                     <input type="text" id="nomeTecnico" name="nomeTecnico" class="form-control"
                         th:value="${nomeTecnico}" placeholder="Inserisci nome tecnico" />
                 </div>
 
                 <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">Cerca</button>
+                    <button type="submit" class="btn singleButttonStyle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                        Cerca
+                    </button>
                 </div>
 
             </form>
