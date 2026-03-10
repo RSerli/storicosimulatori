@@ -71,6 +71,38 @@
 
             <!-- RIGHT COLUMN: Tabella Simulazioni -->
             <div class="col-md-8">
+                <!-- Ultima simulazione simulata -->
+                <div class="card shadow mb-3">
+                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">In simulazione</h5>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${simulatore.ultimaSimulazione != null}">
+                            <table class="table table-striped">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Data Creazione</th>
+                                        <th>Nome Impianto</th>
+                                        <th>Nome Tencinco</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            th:text="${#temporals.format(simulatore.ultimaSimulazione.createdAt, 'dd/MM/yyyy')}">
+                                        </td>
+                                        <td th:text="${simulatore.ultimaSimulazione.nomeImpianto}"></td>
+                                        <td th:text="${simulatore.ultimaSimulazione.nomeTencinco}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div th:if="${simulatore.ultimaSimulazione == null}">
+                            Nessun impianto in simulazione.
+                        </div>
+                    </div>
+                </div>
+                <!-- Lista di tutte le simulazione associate -->
                 <div class="card shadow">
                     <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">Simulazioni Associate</h5>
@@ -95,7 +127,8 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="simulazione : ${simulatore.simulazioniAssociate}">
-                                        <td th:text="${#temporals.format(simulazione.createdAt, 'dd/MM/yyyy')}"></td>
+                                        <td th:text="${#temporals.format(simulazione.createdAt, 'dd/MM/yyyy')}">
+                                        </td>
                                         <td th:text="${simulazione.nomeImpianto}"></td>
                                         <td th:text="${simulazione.nomeTencinco}"></td>
                                     </tr>
@@ -195,7 +228,6 @@
                             <label for="sistemaOperativo" class="form-label">Sistema Operativo <span
                                     class="text-danger">*</span></label>
                             <select class="form-select" id="sistemaOperativo" th:field="*{sistemaOperativo}" required>
-                                <option value="">-- Seleziona un sistema operativo --</option>
                                 <option value="Windows 7">Windows 7</option>
                                 <option value="Windows 10">Windows 10</option>
                                 <option value="Windows 11">Windows 11</option>

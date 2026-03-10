@@ -109,10 +109,18 @@
                                                 th:classappend="${sim.serverAcceso} ? 'bg-success' : 'bg-danger'"></span>
                                         </p>
                                     </div>
-                                    <!-- <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <small class="text-muted">Simulazioni: <span
-                                                th:text="${#lists.size(sim.simulazioniAssociate)}">0</span></small>
-                                    </div> -->
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">
+                                            <span th:if="${sim.ultimaSimulazione != null}">
+                                                Ultima simulazione: <span
+                                                    th:text="${#temporals.format(sim.ultimaSimulazione.createdAt, 'dd/MM/yyyy')}">00/00/0000</span>
+                                                - <span th:text="${sim.ultimaSimulazione.nomeImpianto}">Impianto</span>
+                                            </span>
+                                            <span th:if="${sim.ultimaSimulazione == null}">
+                                                Nessuna simulazione
+                                            </span>
+                                        </small>
+                                    </div>
                                 </a>
                             </div>
                         </div>

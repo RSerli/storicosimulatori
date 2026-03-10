@@ -1,5 +1,7 @@
 package com.utilitysacmitech.storicosimulatori.controller;
 
+// import java.util.Comparator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,15 +34,24 @@ public class detailSimulatorController {
         if (simulatore == null) {
             return "redirect:/";
         }
+        // sortSimulazioniDesc(simulatore);
         model.addAttribute("simulatore", simulatore);
         model.addAttribute("simulazione", new simulazioneGenerale());
         return "dettaglioSimulatore";
     }
 
+    // private void sortSimulazioniDesc(simulatore simulatore) {
+    //     if (simulatore == null || simulatore.getSimulazioniAssociate() == null) {
+    //         return;
+    //     }
+    //     simulatore.getSimulazioniAssociate().sort(Comparator.comparing(sim -> sim.getCreatedAt()).reversed());
+    // }
+
     @PostMapping("/{ide}/aggiungiSimulazione")
     public String saveSimulazione(@PathVariable Integer ide, @Valid simulazioneGenerale simulazione, BindingResult result, Model model) {
         if (result.hasErrors()) {
             simulatore simulatore = service.findById(ide);
+            // sortSimulazioniDesc(simulatore);
             model.addAttribute("simulatore", simulatore);
             model.addAttribute("simulazione", simulazione);
             return "dettaglioSimulatore";
@@ -62,6 +73,7 @@ public class detailSimulatorController {
             if (existing != null) {
                 simulatore.setSimulazioniAssociate(existing.getSimulazioniAssociate());
             }
+            // sortSimulazioniDesc(simulatore);
             model.addAttribute("simulatore", simulatore);
             model.addAttribute("simulazione", new simulazioneGenerale());
             model.addAttribute("openEditModal", true);

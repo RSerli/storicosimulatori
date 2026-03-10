@@ -1,5 +1,6 @@
 package com.utilitysacmitech.storicosimulatori.model;
 
+import java.util.Comparator;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -84,5 +86,14 @@ public class simulatore {
         this.simulazioniAssociate = simulazioniAssociate;
     }
 
-    
+    @Transient
+    public simulazioneGenerale getUltimaSimulazione() {
+        if (simulazioniAssociate == null || simulazioniAssociate.isEmpty()) {
+            return null;
+        }
+        return simulazioniAssociate.stream()
+                .max(Comparator.comparing(sim -> sim.getCreatedAt()))
+                .orElse(null);
+    }
+
 }
