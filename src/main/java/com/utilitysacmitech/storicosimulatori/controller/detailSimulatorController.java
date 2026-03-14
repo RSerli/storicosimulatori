@@ -2,6 +2,8 @@ package com.utilitysacmitech.storicosimulatori.controller;
 
 // import java.util.Comparator;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,30 +30,30 @@ public class detailSimulatorController {
     @Autowired
     private simulazioneService simulazioneService;
 
+    private void sortSimulazioni(simulatore simulatore) {
+        if (simulatore == null || simulatore.getSimulazioniAssociate() == null) {
+            return;
+        }
+        Collections.sort(simulatore.getSimulazioniAssociate(), (s1, s2) -> s2.getCreatedAt().compareTo(s1.getCreatedAt()));
+    }
+
      @GetMapping("/{id}")
     public String dettaglioSimulatore(@PathVariable Integer id, Model model) {
         simulatore simulatore = service.findById(id);
         if (simulatore == null) {
             return "redirect:/";
         }
-        // sortSimulazioniDesc(simulatore);
+        sortSimulazioni(simulatore);
         model.addAttribute("simulatore", simulatore);
         model.addAttribute("simulazione", new simulazioneGenerale());
         return "dettaglioSimulatore";
     }
 
-    // private void sortSimulazioniDesc(simulatore simulatore) {
-    //     if (simulatore == null || simulatore.getSimulazioniAssociate() == null) {
-    //         return;
-    //     }
-    //     simulatore.getSimulazioniAssociate().sort(Comparator.comparing(sim -> sim.getCreatedAt()).reversed());
-    // }
-
     @PostMapping("/{ide}/aggiungiSimulazione")
     public String saveSimulazione(@PathVariable Integer ide, @Valid simulazioneGenerale simulazione, BindingResult result, Model model) {
         if (result.hasErrors()) {
             simulatore simulatore = service.findById(ide);
-            // sortSimulazioniDesc(simulatore);
+            sortSimulazioni(simulatore);
             model.addAttribute("simulatore", simulatore);
             model.addAttribute("simulazione", simulazione);
             return "dettaglioSimulatore";
@@ -73,7 +75,7 @@ public class detailSimulatorController {
             if (existing != null) {
                 simulatore.setSimulazioniAssociate(existing.getSimulazioniAssociate());
             }
-            // sortSimulazioniDesc(simulatore);
+            sortSimulazioni(simulatore);
             model.addAttribute("simulatore", simulatore);
             model.addAttribute("simulazione", new simulazioneGenerale());
             model.addAttribute("openEditModal", true);
