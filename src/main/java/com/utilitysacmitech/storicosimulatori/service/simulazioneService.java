@@ -1,6 +1,7 @@
 package com.utilitysacmitech.storicosimulatori.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.utilitysacmitech.storicosimulatori.model.simulazioneGenerale;
@@ -21,21 +22,21 @@ public class simulazioneService {
     }
 
     public Iterable<simulazioneGenerale> findAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     public Iterable<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCase(String nomeImpianto) {
-        return repository.findByNomeImpiantoContainingIgnoreCase(nomeImpianto);
+        return repository.findByNomeImpiantoContainingIgnoreCaseOrderByCreatedAtDesc(nomeImpianto);
     }
 
     public Iterable<simulazioneGenerale> findByNomeTencincoContainingIgnoreCase(String nomeTencinco) {
-        return repository.findByNomeTencincoContainingIgnoreCase(nomeTencinco);
+        return repository.findByNomeTencincoContainingIgnoreCaseOrderByCreatedAtDesc(nomeTencinco);
     }
 
     public Iterable<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCase(
             String nomeImpianto,
             String nomeTencinco) {
-        return repository.findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCase(nomeImpianto,
+        return repository.findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCaseOrderByCreatedAtDesc(nomeImpianto,
                 nomeTencinco);
     }
 
