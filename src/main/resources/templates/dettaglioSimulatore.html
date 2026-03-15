@@ -79,7 +79,7 @@
                         <form th:unless="${simulatore.isFree}"
                             th:action="@{/simulatore/{id}/libera(id=${simulatore.id})}" th:method="post"
                             style="display: inline;">
-                            <button type="submit" class="btn btn-light btn-sm text-danger">
+                            <button type="submit" class="btn btn-danger btn-sm">
                                 Libera Simulatore
                             </button>
                         </form>
