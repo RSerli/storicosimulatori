@@ -80,6 +80,15 @@ public class detailSimulatorController {
         return "redirect:/simulatore/" + id;
     }
 
+    @PostMapping("/{id}/elimina")
+    public String eliminaSimulatore(@PathVariable Integer id) {
+        simulatore simulatore = service.findById(id);
+        if (simulatore != null) {
+            service.deleteById(id);
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/{id}/modifica")
     public String updateSimulatore(@PathVariable Integer id, @Valid simulatore simulatore, BindingResult result, Model model) {
         if (result.hasErrors()) {

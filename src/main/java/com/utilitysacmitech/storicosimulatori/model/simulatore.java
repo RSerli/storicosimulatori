@@ -3,6 +3,7 @@ package com.utilitysacmitech.storicosimulatori.model;
 import java.util.Comparator;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class simulatore {
 
      private Boolean isFree = true;
 
-    @OneToMany(mappedBy="simulatoreAssociatoImpianto")
+    @OneToMany(mappedBy="simulatoreAssociatoImpianto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<simulazioneGenerale> simulazioniAssociate;
 
     public Integer getId() {
