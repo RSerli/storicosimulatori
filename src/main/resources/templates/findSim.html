@@ -72,7 +72,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="sim : ${simulazioni}">
-                            <td th:text="${sim.createdAt}">2026-01-01</td>
+                            <td th:text="${#temporals.format(sim.createdAt, 'dd/MM/yyyy')}">2026-01-01</td>
                             <td th:text="${sim.nomeImpianto}">Impianto</td>
                             <td th:text="${sim.nomeTencinco}">Tecnico</td>
                             <td
