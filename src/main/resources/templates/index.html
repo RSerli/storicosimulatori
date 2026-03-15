@@ -97,7 +97,7 @@
                                         <!-- immagine computer indica stato del simulatore -->
                                         <div class="col-4">
                                             <!-- SVG di Server NON Connesso -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="red"
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="grey"
                                                 class="bi bi-pc-display-horizontal" th:unless="${sim.serverAcceso}"
                                                 viewBox="0 0 16 16">
                                                 <path
@@ -126,7 +126,7 @@
                                     <div class="card-footer d-flex justify-content-between align-items-center">
                                         <small class="text-muted">
                                             <span th:if="${sim.ultimaSimulazione != null}">
-                                                Ultima simulazione: <span
+                                                In simulazione: <span
                                                     th:text="${#temporals.format(sim.ultimaSimulazione.createdAt, 'dd/MM/yyyy')}">00/00/0000</span>
                                                 - <span th:text="${sim.ultimaSimulazione.nomeImpianto}">Impianto</span>
                                             </span>

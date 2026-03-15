@@ -63,11 +63,12 @@
                                 data-bs-target="#modificaSimulatoreModal">
                                 Modifica
                             </button>
-                            <form th:action="@{/simulatore/{id}/elimina(id=${simulatore.id})}" th:method="post"
-                                style="display: inline;"
-                                onsubmit="return confirm('Sei sicuro di voler eliminare il simulatore? Questa azione è irreversibile.');">
-                                <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
-                            </form>
+
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#eliminaSimulatoreModal">
+                                Elimina
+                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -263,6 +264,40 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                         <button type="submit" class="btn btn-primary">Salva</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Elimina Simulatore -->
+    <div class="modal fade" id="eliminaSimulatoreModal" tabindex="-1" aria-labelledby="eliminaSimulatoreLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="eliminaSimulatoreLabel">Elimina Simulatore</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <form th:action="@{/simulatore/{id}/elimina(id=${simulatore.id})}" th:method="post"
+                    th:object="${simulatore}" id="formEliminaSimulatore">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" th:field="*{id}" />
+
+                        <p>Sei sicuro di voler eliminare il simulatore "<span th:text="${simulatore.nomeServer}">Nome
+                                Server</span>"?</p>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <button type="submit" class="btn btn-danger">Elimina</button>
                     </div>
 
                 </form>
