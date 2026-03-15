@@ -35,6 +35,8 @@ public class simulatore {
 
     private Boolean serverAcceso = false;
 
+     private Boolean isFree = true;
+
     @OneToMany(mappedBy="simulatoreAssociatoImpianto")
     private List<simulazioneGenerale> simulazioniAssociate;
 
@@ -86,9 +88,17 @@ public class simulatore {
         this.simulazioniAssociate = simulazioniAssociate;
     }
 
+    public Boolean getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Boolean isFree) {
+        this.isFree = isFree;
+    }
+
     @Transient
     public simulazioneGenerale getUltimaSimulazione() {
-        if (simulazioniAssociate == null || simulazioniAssociate.isEmpty()) {
+        if (simulazioniAssociate == null || simulazioniAssociate.isEmpty() || this.isFree == true) {
             return null;
         }
         return simulazioniAssociate.stream()

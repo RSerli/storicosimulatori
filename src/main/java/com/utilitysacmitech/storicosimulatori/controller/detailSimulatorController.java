@@ -44,6 +44,7 @@ public class detailSimulatorController {
             return "redirect:/";
         }
         sortSimulazioni(simulatore);
+        simulatore.getUltimaSimulazione();
         model.addAttribute("simulatore", simulatore);
         model.addAttribute("simulazione", new simulazioneGenerale());
         return "dettaglioSimulatore";
@@ -62,10 +63,21 @@ public class detailSimulatorController {
         simulatore simulatore = service.findById(ide);
         if (simulatore != null) {
             simulazione.setSimulatoreAssociatoImpianto(simulatore);
+            simulatore.setIsFree(false);
             simulazioneService.saveSimulazione(simulazione);
         }
-        
+
         return "redirect:/simulatore/" + ide;
+    }
+
+    @PostMapping("/{id}/libera")
+    public String liberaSimulatore(@PathVariable Integer id) {
+        simulatore simulatore = service.findById(id);
+        if (simulatore != null) {
+            simulatore.setIsFree(true);
+            service.saveSimulatore(simulatore);
+        }
+        return "redirect:/simulatore/" + id;
     }
 
     @PostMapping("/{id}/modifica")
