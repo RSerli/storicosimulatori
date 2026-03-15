@@ -92,22 +92,36 @@
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             <div class="col" th:each="sim : ${simulatori}">
                                 <a class="card h-100 cardStyle" th:href="@{'/simulatore/' + ${sim.id}}">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${sim.nomeServer}">Nome Server</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted" th:text="${sim.ipString}">0.0.0.0</h6>
-                                        <p class="card-text">
-                                            <strong>Sistema Operativo:</strong>
-                                            <span th:text="${sim.sistemaOperativo}">OS</span>
-                                        </p>
-                                        <p class="card-text d-flex align-items-center gap-2">
-                                            <strong>Stato:</strong>
-                                            <span class="badge rounded-pill"
-                                                th:classappend="${sim.serverAcceso} ? 'bg-success' : 'bg-danger'"
-                                                th:text="${sim.serverAcceso} ? 'Online' : 'Offline'"></span>
-                                            <span class="rounded-circle"
-                                                style="width: 10px; height: 10px; display: inline-block;"
-                                                th:classappend="${sim.serverAcceso} ? 'bg-success' : 'bg-danger'"></span>
-                                        </p>
+                                    <div class="card-body row">
+
+                                        <!-- immagine computer indica stato del simulatore -->
+                                        <div class="col-4">
+                                            <!-- SVG di Server NON Connesso -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="red"
+                                                class="bi bi-pc-display-horizontal" th:unless="${sim.serverAcceso}"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25" />
+                                            </svg>
+                                            <!-- SVG di Server Connesso -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="green"
+                                                class="bi bi-pc-display-horizontal" th:if="${sim.serverAcceso}"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5M12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0m2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0M1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25" />
+                                            </svg>
+
+                                        </div>
+                                        <!-- descrizione rapida del simulatore -->
+                                        <div class="col-8">
+                                            <h5 class="card-title" th:text="${sim.nomeServer}">Nome Server</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted" th:text="${sim.ipString}">0.0.0.0
+                                            </h6>
+                                            <p class="card-text">
+                                                <strong>Sistema Operativo:</strong>
+                                                <span th:text="${sim.sistemaOperativo}">OS</span>
+                                            </p>
+                                        </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-between align-items-center">
                                         <small class="text-muted">
