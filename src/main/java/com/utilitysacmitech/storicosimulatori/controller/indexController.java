@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.utilitysacmitech.storicosimulatori.model.simulatore;
 import com.utilitysacmitech.storicosimulatori.repository.simulatoreRepository;
+import com.utilitysacmitech.storicosimulatori.service.simulatoreService;
 
 @Controller
 @RequestMapping("/")
@@ -18,6 +19,9 @@ public class indexController{
 
     @Autowired
     private simulatoreRepository simulatoreRepo;
+
+    @Autowired
+    private simulatoreService simulatoreService;
 
     private void sortSimulatori(List<simulatore> simulatori) {
         if (simulatori == null) {
@@ -30,6 +34,7 @@ public class indexController{
 
     @GetMapping
     public String index(Model model) {
+        simulatoreService.checkAllServersReachable();
         List<simulatore> simulatori = simulatoreRepo.findAll();
         sortSimulatori(simulatori);
         model.addAttribute("simulatori", simulatori);

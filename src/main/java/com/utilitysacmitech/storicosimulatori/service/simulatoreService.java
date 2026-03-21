@@ -1,5 +1,7 @@
 package com.utilitysacmitech.storicosimulatori.service;
 
+import java.net.InetAddress;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,24 @@ public class simulatoreService {
 
     public void update(simulatore simulatore) {
         repository.save(simulatore);
+    }
+
+    public boolean isServerReachable(String ipAddress) {
+        try {
+            InetAddress address = InetAddress.getByName(ipAddress);
+            return address.isReachable(3000);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void checkAllServersReachable() {
+        Iterable<simulatore> simulatori = findAll();
+        for (simulatore sim : simulatori) {
+            boolean reachable = isServerReachable(sim.getIpString());
+            sim.setServerAcceso(reachable);
+            update(sim);
+        }
     }
 
 }
