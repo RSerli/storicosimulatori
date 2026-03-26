@@ -34,6 +34,8 @@ public class simulatore {
     @NotNull (message="Campo obbligatorio")
     private String sistemaOperativo;
 
+    private List<String> noteSimulatore;
+
     private Boolean serverAcceso = false;
 
      private Boolean isFree = true;
@@ -97,6 +99,14 @@ public class simulatore {
         this.isFree = isFree;
     }
 
+        public List<String> getNoteSimulatore() {
+        return noteSimulatore;
+    }
+
+    public void setNoteSimulatore(List<String> noteSimulatore) {
+        this.noteSimulatore = noteSimulatore;
+    }
+
     @Transient
     public simulazioneGenerale getUltimaSimulazione() {
         if (simulazioniAssociate == null || simulazioniAssociate.isEmpty() || this.isFree == true) {
@@ -106,5 +116,4 @@ public class simulatore {
                 .max(Comparator.comparing(sim -> sim.getCreatedAt()))
                 .orElse(null);
     }
-
 }

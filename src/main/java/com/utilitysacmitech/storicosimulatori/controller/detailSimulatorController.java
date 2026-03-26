@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.utilitysacmitech.storicosimulatori.model.simulatore;
 import com.utilitysacmitech.storicosimulatori.model.simulazioneGenerale;
@@ -105,6 +106,19 @@ public class detailSimulatorController {
 
         simulatore.setId(id);
         service.saveSimulatore(simulatore);
+        return "redirect:/simulatore/" + id;
+    }
+
+    @PostMapping("/{id}/aggiungiNota")
+    public String aggiungiNota(@PathVariable Integer id, @RequestParam String nota) {
+        simulatore simulatore = service.findById(id);
+        if (simulatore != null && nota != null && !nota.trim().isEmpty()) {
+            if (simulatore.getNoteSimulatore() == null) {
+                simulatore.setNoteSimulatore(new java.util.ArrayList<>());
+            }
+            simulatore.getNoteSimulatore().add(nota.trim());
+            service.saveSimulatore(simulatore);
+        }
         return "redirect:/simulatore/" + id;
     }
 }
