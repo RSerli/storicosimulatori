@@ -99,7 +99,7 @@ public class simulatore {
         this.isFree = isFree;
     }
 
-        public List<String> getNoteSimulatore() {
+    public List<String> getNoteSimulatore() {
         return noteSimulatore;
     }
 

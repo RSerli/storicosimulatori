@@ -105,6 +105,12 @@ public class detailSimulatorController {
         }
 
         simulatore.setId(id);
+        // Mantieni le simulazioni associate e le note esistenti
+        simulatore existing = service.findById(id);
+        if (existing != null) {
+            simulatore.setSimulazioniAssociate(existing.getSimulazioniAssociate());
+            simulatore.setNoteSimulatore(existing.getNoteSimulatore());
+        }
         service.saveSimulatore(simulatore);
         return "redirect:/simulatore/" + id;
     }
