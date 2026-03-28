@@ -44,7 +44,6 @@ public class simulatoreService {
         }
     }
 
-    @Async
     public void checkAllServersReachable() {
         Iterable<simulatore> simulatori = findAll();
         for (simulatore sim : simulatori) {
