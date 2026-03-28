@@ -34,11 +34,16 @@ public class indexController{
 
     @GetMapping
     public String index(Model model) {
-        simulatoreService.checkAllServersReachable();
         List<simulatore> simulatori = simulatoreRepo.findAll();
         sortSimulatori(simulatori);
         model.addAttribute("simulatori", simulatori);
         return "index";
+    }
+
+    @GetMapping("/CheckConnessioni")
+    public String checkConnessioni() {
+        simulatoreService.checkAllServersReachable();
+        return "redirect:/";
     }
 
 }
