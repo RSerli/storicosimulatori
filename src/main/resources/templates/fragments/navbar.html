@@ -14,12 +14,19 @@
 
 <body>
 
-    <nav th:fragment="navbar" class="navbar text-white">
+    <nav th:fragment="navbar(currentPage)" class="navbar text-white">
 
         <div class="container-fluid">
 
             <!-- Titolo -->
-            <div id="title" class="navbar-brand mb-0">SIMULATORI</div>
+
+            <div th:if="${currentPage == 'Home'}" id="title" class="navbar-brand mb-0">SIMULATORI</div>
+
+            <div th:if="${currentPage == 'AddSim'}" id="title" class="navbar-brand mb-0">NUOVO SIMULATORE</div>
+
+            <div th:if="${currentPage == 'DettSim'}" id="title" class="navbar-brand mb-0">DETTAGLIO SIMULATORE</div>
+
+            <div th:if="${currentPage == 'RicercaSim'}" id="title" class="navbar-brand mb-0">RICERCA SIMULAZIONE</div>
 
             <!-- Blocco pulsanti -->
             <div>

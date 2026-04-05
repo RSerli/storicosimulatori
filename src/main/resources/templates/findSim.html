@@ -24,12 +24,11 @@
 <body>
 
     <header>
-        <nav th:replace="fragments/navbar :: navbar"></nav>
+        <nav th:replace="fragments/navbar :: navbar('RicercaSim')"></nav>
     </header>
 
     <main>
-        <div class="container mt-4">
-            <h1 class="mb-4">Ricerca Simulazione</h1>
+        <div class="container mt-3">
 
             <form class="row buttonsRow g-3 pb-2 mb-3" th:action="@{/TrovaSimulazione}" method="get">
 
