@@ -3,7 +3,6 @@ package com.utilitysacmitech.storicosimulatori.service;
 import java.net.InetAddress;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.utilitysacmitech.storicosimulatori.model.simulatore;
