@@ -3,11 +3,12 @@
 }
 
 .singleButttonStyle {
+    display: flex;
+    align-items: center;
     color: black;
     background-color: white;
     border: 1px solid black;
     border-radius: 15px;
-    /* box-shadow: 0 3px #999; */
 }
 
 .singleButttonStyle:hover {

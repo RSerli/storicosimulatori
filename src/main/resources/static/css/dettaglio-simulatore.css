@@ -1,0 +1,15 @@
+#infoSimCard>.card-header {
+    background-color: lightblue;
+}
+
+#noteSimCard>.card-header {
+    background-color: rgb(255, 255, 80);
+}
+
+#lastSimulationSimCard>.card-header {
+    background-color: lightgreen;
+}
+
+#listSimCard>.card-header {
+    background-color: rgb(3, 143, 3);
+}
