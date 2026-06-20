@@ -157,17 +157,33 @@
                                                 <strong>Sistema Operativo:</strong>
                                                 <span th:text="${sim.sistemaOperativo}">OS</span>
                                             </p>
+                                            <!-- stato simulazione -->
+                                            <p class="card-text">
+                                                <strong>Stato:</strong>
+                                                <span class="badge rounded-pill bg-success"
+                                                    th:if="${sim.ultimaSimulazione == null}">
+                                                    Libero
+                                                </span>
+                                                <span class="badge rounded-pill bg-warning"
+                                                    th:if="${sim.ultimaSimulazione != null}">
+                                                    Simulazione in corso
+                                                </span>
+                                            </p>
                                         </div>
                                     </div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <small class="text-muted">
+                                    <!-- Footer con informazioni di stato simulazione -->
+                                    <div class="card-footer d-flex justify-content-center align-items-center">
+                                        <small>
+                                            <!-- mostrs data e impianto in simulazione -->
                                             <span th:if="${sim.ultimaSimulazione != null}">
-                                                In simulazione: <span
+                                                <span
                                                     th:text="${#temporals.format(sim.ultimaSimulazione.createdAt, 'dd/MM/yyyy')}">00/00/0000</span>
-                                                - <span th:text="${sim.ultimaSimulazione.nomeImpianto}">Impianto</span>
+                                                -
+                                                <span th:text="${sim.ultimaSimulazione.nomeImpianto}">Impianto</span>
                                             </span>
+                                            <!-- mostra nulla se è libero -->
                                             <span th:if="${sim.ultimaSimulazione == null}">
-                                                Nessuna simulazione
+                                                -
                                             </span>
                                         </small>
                                     </div>
