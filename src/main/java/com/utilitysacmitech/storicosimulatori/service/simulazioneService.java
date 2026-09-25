@@ -1,6 +1,5 @@
 package com.utilitysacmitech.storicosimulatori.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +9,11 @@ import com.utilitysacmitech.storicosimulatori.repository.simulazioneGeneraleRepo
 @Service
 public class simulazioneService {
 
-    @Autowired
-    private simulazioneGeneraleRepository repository;
+    private final simulazioneGeneraleRepository repository;
+
+    public simulazioneService(simulazioneGeneraleRepository repository) {
+        this.repository = repository;
+    }
 
     public void saveSimulazione(simulazioneGenerale simulazione) {
         repository.save(simulazione);
