@@ -113,7 +113,8 @@ public class simulatore {
             return null;
         }
         return simulazioniAssociate.stream()
-                .max(Comparator.comparing(sim -> sim.getCreatedAt()))
+                .max(Comparator.comparing(simulazioneGenerale::getCreatedAt)
+                        .thenComparing(simulazioneGenerale::getId, Comparator.nullsFirst(Comparator.naturalOrder())))
                 .orElse(null);
     }
 }

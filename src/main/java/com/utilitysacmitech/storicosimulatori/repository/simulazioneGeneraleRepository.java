@@ -8,11 +8,11 @@ import com.utilitysacmitech.storicosimulatori.model.simulazioneGenerale;
 
 public interface simulazioneGeneraleRepository extends JpaRepository<simulazioneGenerale, Integer> {
 
-    List<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseOrderByCreatedAtDesc(String nomeImpianto);
+    List<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseOrderByCreatedAtDescIdDesc(String nomeImpianto);
 
-    List<simulazioneGenerale> findByNomeTencincoContainingIgnoreCaseOrderByCreatedAtDesc(String nomeTencinco);
+    List<simulazioneGenerale> findByNomeTencincoContainingIgnoreCaseOrderByCreatedAtDescIdDesc(String nomeTencinco);
 
-    List<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCaseOrderByCreatedAtDesc(
+    List<simulazioneGenerale> findByNomeImpiantoContainingIgnoreCaseAndNomeTencincoContainingIgnoreCaseOrderByCreatedAtDescIdDesc(
             String nomeImpianto,
             String nomeTencinco);
 

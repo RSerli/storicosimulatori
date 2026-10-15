@@ -3,6 +3,7 @@ package com.utilitysacmitech.storicosimulatori.controller;
 // import java.util.Comparator;
 
 import java.util.Collections;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,10 @@ public class detailSimulatorController {
         if (simulatore == null || simulatore.getSimulazioniAssociate() == null) {
             return;
         }
-        Collections.sort(simulatore.getSimulazioniAssociate(), (s1, s2) -> s2.getCreatedAt().compareTo(s1.getCreatedAt()));
+        Collections.sort(simulatore.getSimulazioniAssociate(),
+                Comparator.comparing(simulazioneGenerale::getCreatedAt)
+                        .thenComparing(simulazioneGenerale::getId, Comparator.nullsFirst(Comparator.naturalOrder()))
+                        .reversed());
     }
 
      @GetMapping("/{id}")

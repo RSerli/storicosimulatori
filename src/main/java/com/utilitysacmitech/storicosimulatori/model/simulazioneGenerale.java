@@ -1,6 +1,6 @@
 package com.utilitysacmitech.storicosimulatori.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class simulazioneGenerale {
     private Integer id;
 
     @SuppressWarnings("FieldMayBeFinal")
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @NotBlank
     @NotNull (message="Campo obbligatorio")
@@ -43,7 +43,7 @@ public class simulazioneGenerale {
         this.id = id;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
